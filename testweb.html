@@ -326,7 +326,7 @@
             var c_comment 	  = row.insertCell(3);
             var c_operations  = row.insertCell(4);  
             var line = document.createElement("p"); // สร้าง icon แก้ไข กับ ลบ
-            // line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
+             line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
             // line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>"; // onclick='document.getElementById('id01').style.display='block'' style='width:auto;'
             
             line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this)' style='width:auto;'>Edit</button>";
@@ -373,9 +373,9 @@
       }
       function delete_data()
       {
-        // var tbId = document.getElementsByName('del');
-        // tbId.id;
-        // ref.child(tbId.id).remove();    // ลบข้อมูลลงใน file base
+        var tbId = document.getElementsByName('del');
+        tbId.id;
+        ref.child(tbId.id).remove();    // ลบข้อมูลลงใน file base
         
       }
       
