@@ -328,7 +328,7 @@
             var line = document.createElement("p"); // สร้าง icon แก้ไข กับ ลบ
             // line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
             // line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>"; // onclick='document.getElementById('id01').style.display='block'' style='width:auto;'
-            line.innerHTML  = "&nbsp &nbsp<button class='btn btn-warning' id='del"+id+"' value='"+i+"' onclick='delete_data(this)' style='width:auto;'>ลบ</button>";
+            
             
 	    line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this)' style='width:auto;'>เเก้ไข</button>";
             c_id.appendChild(document.createTextNode(id)); // เพิ่มข้อมูลลงในตารางแต่ละคอลัม
@@ -374,9 +374,9 @@
       }
       function delete_data()
       {
-        var tbId = document.getElementsByName('del');
-        tbId.id;
-        ref.child(tbId.id).remove();    // ลบข้อมูลลงใน file base
+//         var tbId = document.getElementsByName('del');
+//         tbId.id;
+//         ref.child(tbId.id).remove();    // ลบข้อมูลลงใน file base
         
       }
       
