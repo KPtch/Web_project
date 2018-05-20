@@ -1,6 +1,6 @@
 <html> 
 <head> 
-<title>1Data management</title>  
+<title>Data management</title>  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -329,7 +329,7 @@
             // line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
             // line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>"; // onclick='document.getElementById('id01').style.display='block'' style='width:auto;'
             
-            
+            line.innerHTML  = "<button class='btn btn-warning' id='del"+id+"' value='"+i+"' style='width:auto;'>delete</button>";
 	    line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this)' style='width:auto;'>Edit</button>";
             c_id.appendChild(document.createTextNode(id)); // เพิ่มข้อมูลลงในตารางแต่ละคอลัม
             c_key.appendChild(document.createTextNode(key));
