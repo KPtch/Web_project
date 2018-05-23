@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1Data management</title>
+  <title>Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -219,6 +219,15 @@
             modal.style.display = "none";
         }
     }
+    
+   var config = {
+      apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
+      authDomain: "testffon-db756.firebaseapp.com",
+      databaseURL: "https://testffon-db756.firebaseio.com",
+      projectId: "testffon-db756",
+      storageBucket: "",
+      messagingSenderId: "544182658792"
+    };
     function getModal(btn_this){
       // Get the modal
       document.getElementById('id01').style.display='block';
@@ -263,14 +272,6 @@
       console.log(link);
       console.log(comment);
     }
-   var config = {
-      apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
-      authDomain: "testffon-db756.firebaseapp.com",
-      databaseURL: "https://testffon-db756.firebaseio.com",
-      projectId: "testffon-db756",
-      storageBucket: "",
-      messagingSenderId: "544182658792"
-    };
     firebase.initializeApp(config);
     display_data();
     var insert_key      = document.getElementById('insert-key');
