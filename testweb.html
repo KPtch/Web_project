@@ -237,13 +237,12 @@
       var comment = document.getElementById('comment');
       var data_all = firebase.database().ref();
        
-      comsole.log(id);
+      comsole.log(idd);
      // data_all.on("value", function (snapshot) {
     //    data        = snapshot.val();
     //    data_length = data.length;
     //  });
    //insert_data(id, key, comment, value)
-      console.log(key.value);
      var a = firebase.database().ref(idd).update({
         key: key.value,
         comment: comment.value,
