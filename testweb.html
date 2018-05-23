@@ -228,6 +228,7 @@
       storageBucket: "",
       messagingSenderId: "544182658792"
     };
+    firebase.initializeApp(config);
     function getModal(btn_this,id){
       // Get the modal
       document.getElementById('id01').style.display='block';
@@ -242,13 +243,19 @@
      //   data        = snapshot.val();
     //    data_length = data.length;
     //  });
-      
-      firebase.database().ref(id).push({
+      var database = firebase.database();
+      var fruitref = database.ref(id);
+      var result = fruitref.push({
         key: key,
         comment: comment,
         link: value
       });
-      display_data()
+      //firebase.database().ref(id).push({
+     //   key: key,
+      //  comment: comment,
+      //  link: value
+    //  });
+     // display_data()
       //----
        while (i < data.length) {
         console.log(key + "=" + data[i].key);
@@ -281,7 +288,7 @@
       console.log(link);
       console.log(comment);
     }
-    firebase.initializeApp(config);
+    
     display_data();
     var insert_key      = document.getElementById('insert-key');
     var insert_value    = document.getElementById('insert-value');
