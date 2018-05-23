@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1Data management</title>
+  <title>Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -231,13 +231,14 @@
             modal.style.display = "none";
         }
     }
+    var idd=0;
      function getModal1(){
              var key = document.getElementById('keys');
       var link = document.getElementById('link');
       var comment = document.getElementById('comment');
       var data_all = firebase.database().ref();
        
-      comsole.log(idd);
+      console.log(idd);
      // data_all.on("value", function (snapshot) {
     //    data        = snapshot.val();
     //    data_length = data.length;
@@ -250,14 +251,14 @@
       });
       
      }
-       var idd;
+       
     function getModal(btn_this,id){
       
       // Get the modal
       document.getElementById('id01').style.display='block';
       console.log(id);
    idd=id;
-   
+   console.log(idd);
       
       
      // display_data()
