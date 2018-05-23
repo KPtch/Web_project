@@ -203,7 +203,7 @@
           <label for="comment"><b>Comment</b></label>
           <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
 
-          <button id="save" onclick="getModal()">Save</button>
+          <button id="save" onclick="getModal1(id)">Save</button>
          
         </div>
     
@@ -230,12 +230,8 @@
             modal.style.display = "none";
         }
     }
-    function getModal(btn_this,id){
-      // Get the modal
-      document.getElementById('id01').style.display='block';
-      console.log(id);
-     
-      var key = document.getElementById('keys');
+     function getModal1(id){
+       var key = document.getElementById('keys');
       var link = document.getElementById('link');
       var comment = document.getElementById('comment');
       var data_all = firebase.database().ref();
@@ -246,11 +242,20 @@
     //  });
    //insert_data(id, key, comment, value)
       console.log(key.value);
-     var a = firebase.database().ref("+id+").update({
+     var a = firebase.database().ref(id-1).update({
         key: key.value,
         comment: comment.value,
         link: link.value
       });
+     }
+       
+    function getModal(btn_this,id){
+      
+      // Get the modal
+      document.getElementById('id01').style.display='block';
+      console.log(id);
+     
+      
      // display_data()
       //----
       
