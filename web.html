@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data management</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+ <style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+  th, td {
+      text-align: left;
+      padding: 8px;
+  }
+  tr:nth-child(even){background-color: #f2f2f2}
+  th {
+      background-color: #003366;
+      color: white;   
+  }
+  
+  /* Full-width input fields */
+  input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+  }
+  /* Set a style for all buttons */
+  button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+  }
+  button:hover {
+      opacity: 0.8;
+  }
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+  }
+  /* Center the image and position the close button */
+  .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      position: relative;
+  }
+  img.avatar {
+      width: 40%;
+      border-radius: 50%;
+  }
+  .container {
+      padding: 16px;
+  }
+  span.psw {
+      float: right;
+      padding-top: 16px;
+  }
+  /* The Modal (background) */
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      padding-top: 60px;
+  }
+  /* Modal Content/Box */
+  .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+  }
+  /* The Close Button (x) */
+  .close {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      color: #000;
+      font-size: 35px;
+      font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+      color: red;
+      cursor: pointer;
+  }
+  /* Add Zoom Animation */
+  .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+  }
+  @-webkit-keyframes animatezoom {
+      from {-webkit-transform: scale(0)} 
+      to {-webkit-transform: scale(1)}
+  }
+  @keyframes animatezoom {
+      from {transform: scale(0)} 
+      to {transform: scale(1)}
+  }
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+      .cancelbtn {
+        width: 100%;
+      }
+  }
+</style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container-fluid">
+      <h1>Data management</h1>
+    </div>
+  </header>
+ <input id="prod"  type="hidden" value="0">
+  <div class="form-item form-type-textfield form-group">
+    
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Key</label>
+      <input class="form-control form-text" type="text" id="insert-key" name="key" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Value</label>
+      <input class="form-control form-text" type="text" id="insert-value" name="value" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Comment</label>
+      <input class="form-control form-text" type="text" id="insert-comment" name="comment" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4" style="padding-top: 25px">
+      <div class="col-sm-2">
+        <button id="btn-insert" type="submit" class="btn btn-success">Insert</button>
+      </div>
+      <div class="col-sm-2">
+        <button id="btn-reset" type="reset" value="Reset" class="btn btn-warning">Reset</button>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <!-- Table -->
+  <div class="grid-result-data">
+    <div class="table-responsive-report" style="padding: 170px 0px 15px 10px 15px;">
+      <table class="clickable table table-hover table-striped sticky-enabled tableheader-processed sticky-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>KEY</th>
+            <th>Value</th>
+            <th>Comment</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody id="table-list">
+          <tr>
+            <td class="id"></td>
+            <td class="key"></td>
+            <td class="value"></td>
+            <td class="Comment"></td>
+            <td class="operations"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="id01" class="modal">
+      
+      <form class="modal-content animate">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <div class="container">
+          <label for="keys"><b>Key</b></label>
+          <input type="text" placeholder="Enter key" id="keys" name="keys" required>
+    
+          <label for="link"><b>Link</b></label>
+          <input type="text" placeholder="Enter link" id="link" name="link" required>
+            
+          <label for="comment"><b>Comment</b></label>
+          <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
+
+          <button id="save" onclick="getModal1()">Save</button>
+        
+      
+        </div>
+    
+      </form>
+    </div>
+
+  <script>
+    // Initialize Firebase
+     
+    
+   var config = {
+      apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
+      authDomain: "testffon-db756.firebaseapp.com",
+      databaseURL: "https://testffon-db756.firebaseio.com",
+      projectId: "testffon-db756",
+      storageBucket: "",
+      messagingSenderId: "544182658792"
+    };
+    firebase.initializeApp(config);
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    var idd=0;
+     function getModal1(){
+             var key = document.getElementById('keys');
+      var link = document.getElementById('link');
+      var comment = document.getElementById('comment');
+      var data_all = firebase.database().ref();
+       
+      console.log(idd);
+     // data_all.on("value", function (snapshot) {
+    //    data        = snapshot.val();
+    //    data_length = data.length;
+    //  });
+   //insert_data(id, key, comment, value)
+     var a = firebase.database().ref(idd-1).update({
+        key: key.value,
+        comment: comment.value,
+        link: link.value
+      });
+      
+     }
+     function  getModalDe(btn_this,i){
+       var a = firebase.database().ref(i);
+       a.remove();
+       display_data();
+     
+     
+     
+     }
+    function getModal(btn_this,id){
+      
+      // Get the modal
+      document.getElementById('id01').style.display='block';
+      console.log(id);
+   idd=id;
+   console.log(idd);
+      
+      
+     // display_data()
+      //----
+      
+    }
+    
+    display_data();
+    var insert_key      = document.getElementById('insert-key');
+    var insert_value    = document.getElementById('insert-value');
+    var insert_comment  = document.getElementById('insert-comment');
+    var data        = {};
+    document.getElementById('btn-reset').onclick = function () {
+      console.log("btn-reset");
+      insert_key.value      = "";
+      insert_value.value    = "";
+      insert_comment.value  = "";
+    };
+    document.getElementById('btn-insert').onclick = function () {
+      var key     = insert_key.value;
+      var value   = insert_value.value;
+      var comment = insert_comment.value;
+      insert_key.value        = "";
+      insert_value.value      = "";
+      insert_comment.value    = "";
+      console.log("insert_key : "     + key);
+      console.log("insert_value : "   + value);
+      console.log("insert_comment: "  + comment);
+      var data_length;
+      var data;
+      var data_all = firebase.database().ref();
+      data_all.on("value", function (snapshot) {
+        data        = snapshot.val();
+        data_length = data.length;
+      });
+      var num = 0;
+      var i = 0;
+      console.log("data");
+      console.log(data);
+      console.log("data_length");
+      console.log(data_length);
+      console.log("-----for----");
+      while (i < data.length) {
+        console.log(key + "=" + data[i].key);
+        if (key == data[i].key) {
+          console.log("-----key == key ----");
+          num = 1;
+          console.log(key + "=" + data[i].key);
+          break;
+        }
+        i++;
+      }
+      // console.log("-----------");
+      console.log(num);
+      if (key != "" && value != "" && comment != "") {
+        if (num == 1) {
+          alert("This key already exists.");
+        } else {
+          insert_data(data_length, key, comment, value);
+          alert("Save completed");
+        }
+      }else{
+        alert("Please enter a message.");
+      }
+    };
+    function display_data() {
+      var ref         = firebase.database().ref();
+      
+      
+      var tbId        = document.getElementById('table-list');
+      var key         = {};
+      var Table       = document.getElementById("table-list");
+      Table.innerHTML = "";
+      // อ่านค่าและแสดงผลในตางรางจาก filebase
+      ref.on("value", function (snapshot) {
+        data  = snapshot.val(); // เก็บข้อมูลที่ได้จาก firebase ไว้ที่ตัวแปร data
+        data_array = snapshot.val();
+        var id,idqqd;
+        var key;
+        var link;
+        var comment;
+        for (var i = 0; i < data.length; i++) // Loop เข้าถึงข้อมูล
+        {
+          id        = i + 1;
+          idqqd      = 1000-i; 
+          key       = data[i].key;
+          comment   = data[i].comment;
+          link      = data[i].link;
+          var row   = tbId.insertRow(i); 
+          var c_id  = row.insertCell(0);
+          var c_key = row.insertCell(1);
+          var c_link        = row.insertCell(2);
+          var c_comment     = row.insertCell(3);
+          var c_operations  = row.insertCell(4);
+          var line        = document.createElement("p"); 
+         line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this,"+id+")' style='width:auto;'>Edit</button>";
+         // line.innerHTML  = "<button class='btn btn-warning' id='edit"+idqqd+"' value='"+i+"' onclick='getModalDe(this,"+i+")' style='width:auto;'>Delete</button>";
+          c_id.appendChild(document.createTextNode(id)); 
+          c_key.appendChild(document.createTextNode(key));
+          c_link.appendChild(document.createTextNode(link));
+          c_comment.appendChild(document.createTextNode(comment));
+          c_operations.append(line);
+        }
+      }, function (error) { // ถ้าเกิด error จากการดึงข้อมูลจะแสดง alert ออกมา
+        alert("Error: " + error.code);
+      });
+    }
+    function insert_data(data_length, key, comment, value) {
+      console.log("length : " + data_length);
+      console.log("key : " + key);
+      console.log("comment : " + comment);
+      console.log("value : " + value);
+      firebase.database().ref(data_length).set({
+        key: key,
+        comment: comment,
+        link: value
+      });
+      display_data()
+    }
+    function edit_data(index,key,comment,link) {
+      var id = index.value;
+      console.log(data);
+      var key;
+      var link;
+      var comment;
+      var _keys = Object.keys(data);
+      console.log(_keys);
+      if(data.length > 0){
+        for (var i = 0; i < data.length; i++)
+        {
+          if(id == i){
+            console.log(id +" = "+i);
+            key       = data[i].key;
+            comment   = data[i].comment;
+            link      = data[i].link;
+          }
+        }
+      }else{
+        alert("not have data send error ! (edit ft)");
+      }
+      console.log("id : " + id);
+      console.log("key : " + key);
+      console.log("comment : " + comment);
+      console.log("link : " + link);
+      var http      = new XMLHttpRequest();
+      var url       = "/EditData.php";
+      var params    = "id="+id+"&key="+key+"&link="+link+"&comment="+comment;
+      http.open("POST", url, true);
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      http.onreadystatechange = function() {
+          if(http.readyState == 4 && http.status == 200) {
+              console.log(http.responseText);
+          }
+      }
+      http.send(params);
+      window.location.href = "/EditData.php";
+//       location.href='./EditData.php';
+    }
+    function delete_data() {
+      var tbId  = document.getElementsByName('del');
+      tbId.id;
+      ref.child(tbId.id).remove(); // ลบข้อมูลลงใน file base
+    }
+    //---------------------------------------------
+    document.getElementById('btn-insert').onclick = function() {
+        var ref     = firebase.database().ref();
+        var key     = document.getElementById('insert-key');
+        var link    = document.getElementById('insert-value');
+        var comment = document.getElementById('insert-comment');
+        var data;
+        var id;
+        var num = 0 ;
+        ref.on("value", function(snapshot) { 
+          data = snapshot.val();
+          id = data.length;
+          
+        });
+        if(key.value != "" && link.value != "" && comment.value != ""){
+          for(var i =0; i<data.length ;i++){
+            if(key.value == data[i].key){
+              console.log(key.value+"="+data[i].key);
+              num = 1;
+            }
+          }
+          console.log(num);
+          if(num == 1){
+            alert("This key already exists.");
+          }else{
+            
+            console.log('in on click btn insert');
+            //   console.log(key.value+"="+data[i].key);
+            console.log(id);
+            console.log(key.value);
+            console.log(link.value);
+            console.log(comment.value);
+            console.log('-------------------');
+            insert_data(id,key.value,link.value,comment.value);
+            alert("Save completed.");
+          }
+          
+        }else{
+          
+          alert("Please enter a message.");
+        }
+      }
+  </script>
+
+</body>
+
+</html>
