@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1Data management</title>
+  <title>Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -204,7 +204,8 @@
           <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
 
           <button id="save" onclick="getModal1()">Save</button>
-         
+         <input id="prod"  type="hidden" value="0">
+      
         </div>
     
       </form>
@@ -235,7 +236,7 @@
       var link = document.getElementById('link');
       var comment = document.getElementById('comment');
       var data_all = firebase.database().ref();
-       var id =document.getElementById('save').value;
+       var id =document.getElementById('pord').value;
       comsole.log(id);
      // data_all.on("value", function (snapshot) {
     //    data        = snapshot.val();
@@ -250,14 +251,13 @@
       });
       
      }
-       var id1 ;
+       
     function getModal(btn_this,id){
       
       // Get the modal
       document.getElementById('id01').style.display='block';
       console.log(id);
-     document.getElementById('save').value = id
-      
+     document.getElementById('pord').value = id;
    
       
       
