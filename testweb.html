@@ -256,7 +256,8 @@
       console.log(num);
       if (key != "" && value != "" && comment != "") {
         if (num == 1) {
-          alert("This key already exists.");
+          insert_data(data_length, key, comment, value);
+          alert("Save completed");
         } else {
           insert_data(data_length, key, comment, value);
           alert("Save completed");
