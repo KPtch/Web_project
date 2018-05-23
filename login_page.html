@@ -74,8 +74,8 @@ button {
         console.log(uname.value);
         console.log(pass.value);
       
-       var data_all = firebase.database().ref();
-      data_all.on("value", function (snapshot) {
+        var data_all = firebase.database().ref();
+        data_all.on("value", function (snapshot) {
         data        = snapshot.val();
         data_length = data.length;
         for(var i =0;i<data_length;i++){
