@@ -1,255 +1,95 @@
-<html> 
-<head> 
-<title>Data management</title>  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1Data management</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-  body {font-family: Arial, Helvetica, sans-serif;}
-  table {
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <style>
+    table {
       border-collapse: collapse;
       width: 100%;
-  }
-  th, td {
+    }
+    th,
+    td {
       text-align: left;
       padding: 8px;
-  }
-  tr:nth-child(even){background-color: #f2f2f2}
-  th {
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+    th {
       background-color: #003366;
-      color: white;   
-  }
-  
-  /* Full-width input fields */
-  input[type=text], input[type=password] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-  }
-  /* Set a style for all buttons */
-  button {
-      background-color: #4CAF50;
       color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-  }
-  button:hover {
-      opacity: 0.8;
-  }
-  /* Extra styles for the cancel button */
-  .cancelbtn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #f44336;
-  }
-  /* Center the image and position the close button */
-  .imgcontainer {
-      text-align: center;
-      margin: 24px 0 12px 0;
-      position: relative;
-  }
-  img.avatar {
-      width: 40%;
-      border-radius: 50%;
-  }
-  .container {
-      padding: 16px;
-  }
-  span.psw {
-      float: right;
-      padding-top: 16px;
-  }
-  /* The Modal (background) */
-  .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      padding-top: 60px;
-  }
-  /* Modal Content/Box */
-  .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-      border: 1px solid #888;
-      width: 80%; /* Could be more or less, depending on screen size */
-  }
-  /* The Close Button (x) */
-  .close {
-      position: absolute;
-      right: 25px;
-      top: 0;
-      color: #000;
-      font-size: 35px;
-      font-weight: bold;
-  }
-  .close:hover,
-  .close:focus {
-      color: red;
-      cursor: pointer;
-  }
-  /* Add Zoom Animation */
-  .animate {
-      -webkit-animation: animatezoom 0.6s;
-      animation: animatezoom 0.6s
-  }
-  @-webkit-keyframes animatezoom {
-      from {-webkit-transform: scale(0)} 
-      to {-webkit-transform: scale(1)}
-  }
-      
-  @keyframes animatezoom {
-      from {transform: scale(0)} 
-      to {transform: scale(1)}
-  }
-  /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-      span.psw {
-        display: block;
-        float: none;
-      }
-      .cancelbtn {
-        width: 100%;
-      }
-  }
-</style>
-</head>  
-	<body> 
-    
-    <header class="header">   
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
     <div class="container-fluid">
       <h1>Data management</h1>
     </div>
-    </header>
+  </header>
 
-
-    <div class="form-item form-type-textfield form-group">  
-
+  <div class="form-item form-type-textfield form-group">
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Key</label>
+      <input class="form-control form-text" type="text" id="insert-key" name="key" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Value</label>
+      <input class="form-control form-text" type="text" id="insert-value" name="value" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4">
+      <label class="control-label" for="edit-key">Comment</label>
+      <input class="form-control form-text" type="text" id="insert-comment" name="comment" size="60" maxlength="255" placeholder="Type it here">
+    </div>
+    <div class="col-sm-4" style="padding-top: 25px">
       <div class="col-sm-2">
-        <label class="control-label" for="edit-key">Key</label> 
-        <input class="form-control form-text" type="text" id="insert-key" name="key" value="" size="60" maxlength="255">
+        <button id="btn-insert" type="submit" class="btn btn-success">Insert</button>
       </div>
-
-      <div class="col-sm-3">
-        <label class="control-label" for="edit-key">Link</label> 
-        <input class="form-control form-text" type="text" id="insert-value" name="value" value="" size="60" maxlength="255">
+      <div class="col-sm-2">
+        <button id="btn-reset" type="reset" value="Reset" class="btn btn-warning">Reset</button>
       </div>
-
-      <div class="col-sm-3">
-        <label class="control-label" for="edit-key">Comment</label> 
-        <input class="form-control form-text" type="text" id="insert-comment" name="comment" value="" size="60" maxlength="255">
-      </div>
-
-      <div class="col-sm-4" style="padding-top: 25px">
-        <div class="col-sm-3"><button id="btn-insert" type="submit" class="btn btn-success">Submit</button></div>
-        <div class="col-sm-3"><button type="submit" class="btn btn-warning">Reset</button></div>
-      </div>
-
     </div>
 
-
-    <!-- <h2>Modal Login Form</h2>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button> -->
-    
-    <div id="id01" class="modal">
-      
-      <form class="modal-content animate">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <div class="container">
-          <label for="keys"><b>Key</b></label>
-          <input type="text" placeholder="Enter key" id="keys" name="keys" required>
-    
-          <label for="link"><b>Link</b></label>
-          <input type="text" placeholder="Enter link" id="link" name="link" required>
-            
-          <label for="comment"><b>Comment</b></label>
-          <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
-
-          <button id="save" onclick="getModal()">Save</button>
-         
-        </div>
-    
-      </form>
+  </div>
+  <br>
+  <br>
+  <br>
+  <!-- Table -->
+  <div class="grid-result-data">
+    <div class="table-responsive-report" style="padding: 170px 0px 15px 10px 15px;">
+      <table class="clickable table table-hover table-striped sticky-enabled tableheader-processed sticky-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>KEY</th>
+            <th>Value</th>
+            <th>Comment</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody id="table-list">
+          <tr>
+            <td class="id"></td>
+            <td class="key"></td>
+            <td class="value"></td>
+            <td class="Comment"></td>
+            <td class="operations"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-
-    <div class="grid-result-data" >
-      <div class="table-responsive-report" style="padding: 70px 15px 10px 15px;">
-        <table class="clickable table table-hover table-striped sticky-enabled tableheader-processed sticky-table" >
-            <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>KEY</th>
-                  <th>Value</th>
-                  <th>Comment</th>
-                  <th>Operations</th>
-                </tr>
-            </thead>
-  
-            <tbody id="table-list">
-              <tr>
-                <td class="id"></td>
-                <td class="key"></td>
-                <td class="value"></td>
-                <td class="comment"></td>
-                <td class="operations" id="o-id"></td>
-              </tr>
-
-            </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
- 
-    <script> 
-    // Get the modal
-    var modal = document.getElementById('id01');
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    function getModal(btn_this){
-      // Get the modal
-      document.getElementById('id01').style.display='block';
-      
-     
-      var key = document.getElementById('keys');
-      var link = document.getElementById('link');
-      var comment = document.getElementById('comment');
-      console.log(btn_this.value);
-      console.log(document.getElementById('save').onclick);
-      
-      console.log(key);
-      console.log(link);
-      console.log(comment);
-    }
-    // comfig เชื่อมต่อ web กับ firebase
+  <script>
     // Initialize Firebase
-        var config = {
+   var config = {
       apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
       authDomain: "testffon-db756.firebaseapp.com",
       databaseURL: "https://testffon-db756.firebaseio.com",
@@ -368,34 +208,52 @@
       });
       display_data()
     }
-      function edit_data()
-      {
-	      
-        var id = document.getElementById("keys");
-	     
-	      console.log('y');
-	      console.log(id);
-	      console.log(id.id);
-	      console.log(id.name);
-	      console.log(id.value);
-        // ดึง id ที่เลือกมาจาก tabel และค่าที่ต้องการ อัพเดต ทำการอัพเดตข้อมูล
-        // var write_Ref = ref(id); // แก้ไข้ข้อมูลใน a ที่ index 0 เป็น 1
-        // write_Ref.update ({
-        //   "key" : 1
-        //   "comment":1
-        //   "link":1
-        // });
+    function edit_data(index,key,comment,link) {
+      var id = index.value;
+      console.log(data);
+      var key;
+      var link;
+      var comment;
+      var _keys = Object.keys(data);
+      console.log(_keys);
+      if(data.length > 0){
+        for (var i = 0; i < data.length; i++)
+        {
+          if(id == i){
+            console.log(id +" = "+i);
+            key       = data[i].key;
+            comment   = data[i].comment;
+            link      = data[i].link;
+          }
+        }
+      }else{
+        alert("not have data send error ! (edit ft)");
       }
-      function delete_data()
-      {
-//         var tbId = document.getElementsByName('del');
-//         tbId.id;
-//         ref.child(tbId.id).remove();    // ลบข้อมูลลงใน file base
-        
+      console.log("id : " + id);
+      console.log("key : " + key);
+      console.log("comment : " + comment);
+      console.log("link : " + link);
+      var http      = new XMLHttpRequest();
+      var url       = "/EditData.php";
+      var params    = "id="+id+"&key="+key+"&link="+link+"&comment="+comment;
+      http.open("POST", url, true);
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      http.onreadystatechange = function() {
+          if(http.readyState == 4 && http.status == 200) {
+              console.log(http.responseText);
+          }
       }
-      
-	    
-    </script>
-	
-  </body>  
-</html> 
+      http.send(params);
+      window.location.href = "/EditData.php";
+//       location.href='./EditData.php';
+    }
+    function delete_data() {
+      var tbId  = document.getElementsByName('del');
+      tbId.id;
+      ref.child(tbId.id).remove(); // ลบข้อมูลลงใน file base
+    }
+  </script>
+
+</body>
+
+</html>
