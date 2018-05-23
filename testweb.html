@@ -212,13 +212,7 @@
 
   <script>
     // Initialize Firebase
-     var modal = document.getElementById('id01');
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+     
     
    var config = {
       apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
@@ -229,6 +223,13 @@
       messagingSenderId: "544182658792"
     };
     firebase.initializeApp(config);
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
     function getModal(btn_this,id){
       // Get the modal
       document.getElementById('id01').style.display='block';
@@ -244,6 +245,7 @@
     //    data_length = data.length;
     //  });
    //insert_data(id, key, comment, value)
+      console.log(key.value);
      var a = firebase.database().ref("+id+").update({
         key: key.value,
         comment: comment.value,
