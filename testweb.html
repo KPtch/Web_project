@@ -249,22 +249,21 @@
     }
     // comfig เชื่อมต่อ web กับ firebase
     // Initialize Firebase
-     var config = {
-      apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
-      authDomain: "testffon-db756.firebaseapp.com",
-      databaseURL: "https://testffon-db756.firebaseio.com",
-      projectId: "testffon-db756",
-      storageBucket: "",
-      messagingSenderId: "544182658792"
+         var config = {
+      apiKey: "AIzaSyBCXvufpin_C3BrQCio1ZT7MihqnZuciN0",
+      authDomain: "ksbot-test.firebaseapp.com",
+      databaseURL: "https://ksbot-test.firebaseio.com",
+      projectId: "ksbot-test",
+      storageBucket: "ksbot-test.appspot.com",
+      messagingSenderId: "371500888649"
     };
-    firebase.initializeApp(config); //header อินพุทข้อมูลเข้าไฟเบสได้
-      display_data();
-	    var insert_key      = document.getElementById('insert-key');
-	    var insert_value    = document.getElementById('insert-value');
-	    var insert_comment  = document.getElementById('insert-comment');
-	    var data        = {};
-	    
-      document.getElementById('btn-insert').onclick = function() {
+    firebase.initializeApp(config);
+    display_data();
+    var insert_key      = document.getElementById('insert-key');
+    var insert_value    = document.getElementById('insert-value');
+    var insert_comment  = document.getElementById('insert-comment');
+    var data        = {};
+    document.getElementById('btn-reset').onclick = function () {
       console.log("btn-reset");
       insert_key.value      = "";
       insert_value.value    = "";
@@ -304,107 +303,61 @@
         }
         i++;
       }
-
-//         var ref     = firebase.database().ref();
-//         var key     = document.getElementById('insert-key');
-//         var link    = document.getElementById('insert-value');
-//         var comment = document.getElementById('insert-comment');
-//         var data;
-//         var id;
-//         var num = 0 ;
-//         ref.on("value", function(snapshot) { 
-//           data = snapshot.val();
-//           id = data.length;
-          
-//         });
-//         if(key.value != "" && link.value != "" && comment.value != ""){
-//           for(var i =0; i<data.length ;i++){
-//             if(key.value == data[i].key){
-//               console.log(key.value+"="+data[i].key);
-//               num = 1;
-//             }
-//           }
-          console.log(num);
-//           if(num == 1){
-//             alert("This key already exists.");
-//           }else{
-            
-//             console.log('in on click btn insert');
-//             //   console.log(key.value+"="+data[i].key);
-//             console.log(id);
-//             console.log(key.value);
-//             console.log(link.value);
-//             console.log(comment.value);
-//             console.log('-------------------');
-//             insert_data(id,key.value,link.value,comment.value);
-//             alert("Save completed.");
-//           }
-	     if (key != "" && value != "" && comment != "") {
+      // console.log("-----------");
+      console.log(num);
+      if (key != "" && value != "" && comment != "") {
         if (num == 1) {
           alert("This key already exists.");
         } else {
           insert_data(data_length, key, comment, value);
           alert("Save completed");
         }
-          
-        }else{
-          
-          alert("Please enter a message.");
-        }
+      }else{
+        alert("Please enter a message.");
       }
-      function display_data()
-      {
-        var ref = firebase.database().ref();
-        var tbId        = document.getElementById('table-list');
-        var key         = {};
-        
-        var Table = document.getElementById("table-list"); // set table null
-        Table.innerHTML = "";
+    };
+    function display_data() {
+      var ref         = firebase.database().ref();
       
-        // อ่านค่าและแสดงผลในตางรางจาก filebase
-        ref.on("value", function(snapshot) { 
-          data = snapshot.val(); // เก็บข้อมูลที่ได้จาก firebase ไว้ที่ตัวแปร 
-	  dataconsole.log(data);
-	  data_array = snapshot.val();
-          var id;
-          var key;
-          var link;
-          var comment;
-          
-          for(var i = 0; i< data.length ; i++) // Loop เข้าถึงข้อมูล
-          {
-            id        = i+1;
-            key       = data[i].key; 
-            comment   = data[i].comment; 
-            link      = data[i].link; 
-            var row 	        = tbId.insertRow(i);  // กำหนดตัวแปรแทนตัวแต่ละคอลัม
-            var c_id 	        = row.insertCell(0);
-            var c_key 	      = row.insertCell(1);
-            var c_link        = row.insertCell(2);
-            var c_comment 	  = row.insertCell(3);
-            var c_operations  = row.insertCell(4);  
-            var line = document.createElement("p"); // สร้าง icon แก้ไข กับ ลบ
-            // line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
-            // line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>"; // onclick='document.getElementById('id01').style.display='block'' style='width:auto;'
-            
-            
-	    line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this)' style='width:auto;'>Edit</button>";
-            c_id.appendChild(document.createTextNode(id)); // เพิ่มข้อมูลลงในตารางแต่ละคอลัม
-            c_key.appendChild(document.createTextNode(key));
-            c_link.appendChild(document.createTextNode(link));
-            c_comment.appendChild(document.createTextNode(comment));
-            c_operations.append(line);
-		   
-          }
-        }, function (error) { // ถ้าเกิด error จากการดึงข้อมูลจะแสดง alert ออกมา
-          alert("Error: " + error.code);
-        });
-	      
-	      
-      }
-      function insert_data(data_length,key,comment,value)
-      {
-	      console.log("length : " + data_length);
+      
+      var tbId        = document.getElementById('table-list');
+      var key         = {};
+      var Table       = document.getElementById("table-list");
+      Table.innerHTML = "";
+      // อ่านค่าและแสดงผลในตางรางจาก filebase
+      ref.on("value", function (snapshot) {
+        data  = snapshot.val(); // เก็บข้อมูลที่ได้จาก firebase ไว้ที่ตัวแปร data
+        data_array = snapshot.val();
+        var id;
+        var key;
+        var link;
+        var comment;
+        for (var i = 0; i < data.length; i++) // Loop เข้าถึงข้อมูล
+        {
+          id        = i + 1;
+          key       = data[i].key;
+          comment   = data[i].comment;
+          link      = data[i].link;
+          var row   = tbId.insertRow(i); 
+          var c_id  = row.insertCell(0);
+          var c_key = row.insertCell(1);
+          var c_link        = row.insertCell(2);
+          var c_comment     = row.insertCell(3);
+          var c_operations  = row.insertCell(4);
+          var line        = document.createElement("p"); 
+          line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>";
+          c_id.appendChild(document.createTextNode(id)); 
+          c_key.appendChild(document.createTextNode(key));
+          c_link.appendChild(document.createTextNode(link));
+          c_comment.appendChild(document.createTextNode(comment));
+          c_operations.append(line);  
+        }
+      }, function (error) { // ถ้าเกิด error จากการดึงข้อมูลจะแสดง alert ออกมา
+        alert("Error: " + error.code);
+      });
+    }
+    function insert_data(data_length, key, comment, value) {
+      console.log("length : " + data_length);
       console.log("key : " + key);
       console.log("comment : " + comment);
       console.log("value : " + value);
@@ -413,53 +366,8 @@
         comment: comment,
         link: value
       });
-     function display_data()
-      {
-        var ref = firebase.database().ref();
-        var data_array = [];
-        var data = {};
-        var rowIndex = 1;
-        var id;
-        var key; 
-        var comment; 
-        var link;
-        var Table = document.getElementById("table-list"); // set table null
-        Table.innerHTML = "";
-      
-        // อ่านค่าและแสดงผลในตางรางจาก filebase
-        ref.on("value", function(snapshot) { 
-          data = snapshot.val(); // เก็บข้อมูลที่ได้จาก firebase ไว้ที่ตัวแปร data
-          console.log(data);
-          for(var i = 0; i< data.length ; i++) // Loop เข้าถึงข้อมูล
-          {
-            id        = i+1;
-            key       = data[i].key; 
-            comment   = data[i].comment; 
-            link      = data[i].link; 
-            var row 	        = Table.insertRow(i);  // กำหนดตัวแปรแทนตัวแต่ละคอลัม
-            var c_id 	        = row.insertCell(0);
-            var c_key 	      = row.insertCell(1);
-            var c_link        = row.insertCell(2);
-            var c_comment 	  = row.insertCell(3);
-            var c_operations  = row.insertCell(4);  
-            var line = document.createElement("p"); // สร้าง icon แก้ไข กับ ลบ
-            // line.innerHTML = "</a> &nbsp &nbsp<a class='glyphicon glyphicon-trash''"+" id="+id+" name='del'></a>";
-            // line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' name='edit' value='"+i+"' onclick='edit_data(this)'>Edit</button>"; // onclick='document.getElementById('id01').style.display='block'' style='width:auto;'
-            
-            line.innerHTML  = "<button class='btn btn-warning' id='edit"+id+"' value='"+i+"' onclick='getModal(this)' style='width:auto;'>Edit</button>";
-            c_id.appendChild(document.createTextNode(id)); // เพิ่มข้อมูลลงในตารางแต่ละคอลัม
-            c_key.appendChild(document.createTextNode(key));
-            c_link.appendChild(document.createTextNode(link));
-            c_comment.appendChild(document.createTextNode(comment));
-            c_operations.append(line);
-		   
-          }
-        }, function (error) { // ถ้าเกิด error จากการดึงข้อมูลจะแสดง alert ออกมา
-          alert("Error: " + error.code);
-        });
-	      
-	      
-      }
+      display_data()
+    }
       function edit_data()
       {
 	      
