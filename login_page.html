@@ -46,9 +46,11 @@ button {
   </form>
 </div>
 
+
+ 
+
 <script>
-  // Initialize Firebase
-  var config = {
+     var config = {
     apiKey: "AIzaSyD3P_ZDVk14m-cvmXPWtLC8P8vPPYYbDGc",
     authDomain: "loginweb-7ea6d.firebaseapp.com",
     databaseURL: "https://loginweb-7ea6d.firebaseio.com",
@@ -57,15 +59,14 @@ button {
     messagingSenderId: "508111742789"
   };
   firebase.initializeApp(config);
-</script>
-<script>
-    var uname = document.getElementById('name');
-    var pass = document.getElementById('pass');
+    
     var data;
     var data_length;
     console.log(uname.value);
     console.log(pass.value);
     document.getElementById('btn-login').onclick = function() {
+        var uname = document.getElementById('name');
+    var pass = document.getElementById('pass');
         console.log('1');
         var data_all = firebase.database().ref();
       data_all.on("value", function (snapshot) {
