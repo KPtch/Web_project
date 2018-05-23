@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 /* Full-width input fields */
@@ -38,20 +39,43 @@ button {
 
       <label for="psw"><b>Password</b></label>
       <input id="pass" type="password" placeholder="Enter Password" name="pass" required>
-      <form action="http://google.com">
+      
       <button type="button" id="btn-login">Login</button>
-      </form>
+      
     </div>
   </form>
 </div>
 
 <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD3P_ZDVk14m-cvmXPWtLC8P8vPPYYbDGc",
+    authDomain: "loginweb-7ea6d.firebaseapp.com",
+    databaseURL: "https://loginweb-7ea6d.firebaseio.com",
+    projectId: "loginweb-7ea6d",
+    storageBucket: "loginweb-7ea6d.appspot.com",
+    messagingSenderId: "508111742789"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
     var uname = document.getElementById('name');
     var pass = document.getElementById('pass');
+    var data;
+    var data_length;
     console.log(uname.value);
     console.log(pass.value);
     document.getElementById('btn-login').onclick = function() {
         console.log('1');
+        var data_all = firebase.database().ref();
+      data_all.on("value", function (snapshot) {
+        data        = snapshot.val();
+        data_length = data.length;
+      });
+        for(var i =0;i<data_length;i++){
+           console.log( data[i].username);
+            
+        }
         if(uname.value == 'admin' && pass.value == '8888')
         {
             console.log('y');
