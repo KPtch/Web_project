@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data management</title>
+  <title>5Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -237,25 +237,19 @@
       var key = document.getElementById('keys');
       var link = document.getElementById('link');
       var comment = document.getElementById('comment');
-    //  var data_all = firebase.database().ref();
+      var data_all = firebase.database().ref();
       
-    //  data_all.on("value", function (snapshot) {
-     //   data        = snapshot.val();
+     // data_all.on("value", function (snapshot) {
+    //    data        = snapshot.val();
     //    data_length = data.length;
     //  });
-      var database = firebase.database();
-      var fruitref = database.ref(id);
-      var result = fruitref.push({
-        key: key,
-        comment: comment,
-        link: link
+    
+      firebase.database().ref(id).push({
+       key: key.value,
+        comment: comment.value,
+        link: link.value
       });
-      //firebase.database().ref(id).push({
-     //   key: key,
-      //  comment: comment,
-      //  link: value
-    //  });
-     // display_data()
+      //display_data()
       //----
       
     }
