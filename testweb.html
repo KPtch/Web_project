@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1Data management</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <title>Data management</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src = "https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <style>
     table {
       border-collapse: collapse;
@@ -86,9 +86,80 @@
       </table>
     </div>
   </div>
+  <div id="id01" class="modal">
+      
+      <form class="modal-content animate">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <div class="container">
+          <label for="keys"><b>Key</b></label>
+          <input type="text" placeholder="Enter key" id="keys" name="keys" required>
+    
+          <label for="link"><b>Link</b></label>
+          <input type="text" placeholder="Enter link" id="link" name="link" required>
+            
+          <label for="comment"><b>Comment</b></label>
+          <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
+
+          <button id="save" onclick="getModal()">Save</button>
+         
+        </div>
+    
+      </form>
+    </div>
 
   <script>
     // Initialize Firebase
+     var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    function getModal(btn_this){
+      // Get the modal
+      document.getElementById('id01').style.display='block';
+      
+     
+      var key = document.getElementById('keys');
+      var link = document.getElementById('link');
+      var comment = document.getElementById('comment');
+      var data_all = firebase.database().ref();
+      
+      data_all.on("value", function (snapshot) {
+        data        = snapshot.val();
+        data_length = data.length;
+      });
+       while (i < data.length) {
+        console.log(key + "=" + data[i].key);
+        if (key == data[i].key) {
+          console.log("-----key == key ----");
+          num = 1;
+          console.log(key + "=" + data[i].key);
+          break;
+        }
+        i++;
+      }
+      // console.log("-----------");
+      console.log(num);
+      if (key != "" && value != "" && comment != "") {
+        if (num == 1) {
+          alert("This key already exists.");
+        } else {
+          insert_data(data_length, key, comment, value);
+          alert("Save completed");
+        }
+      }else{
+        alert("Please enter a message.");
+      }
+      //-----
+      console.log(btn_this.value);
+      console.log(document.getElementById('save').onclick);
+      
+      console.log(key);
+      console.log(link);
+      console.log(comment);
+    }
    var config = {
       apiKey: "AIzaSyAK2mBIrrNNLxpWtvk1MoVUCZ88KODnmfI",
       authDomain: "testffon-db756.firebaseapp.com",
@@ -252,6 +323,48 @@
       tbId.id;
       ref.child(tbId.id).remove(); // ลบข้อมูลลงใน file base
     }
+    //---------------------------------------------
+    document.getElementById('btn-insert').onclick = function() {
+        var ref     = firebase.database().ref();
+        var key     = document.getElementById('insert-key');
+        var link    = document.getElementById('insert-value');
+        var comment = document.getElementById('insert-comment');
+        var data;
+        var id;
+        var num = 0 ;
+        ref.on("value", function(snapshot) { 
+          data = snapshot.val();
+          id = data.length;
+          
+        });
+        if(key.value != "" && link.value != "" && comment.value != ""){
+          for(var i =0; i<data.length ;i++){
+            if(key.value == data[i].key){
+              console.log(key.value+"="+data[i].key);
+              num = 1;
+            }
+          }
+          console.log(num);
+          if(num == 1){
+            alert("This key already exists.");
+          }else{
+            
+            console.log('in on click btn insert');
+            //   console.log(key.value+"="+data[i].key);
+            console.log(id);
+            console.log(key.value);
+            console.log(link.value);
+            console.log(comment.value);
+            console.log('-------------------');
+            insert_data(id,key.value,link.value,comment.value);
+            alert("Save completed.");
+          }
+          
+        }else{
+          
+          alert("Please enter a message.");
+        }
+      }
   </script>
 
 </body>
