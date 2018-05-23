@@ -74,15 +74,15 @@ button {
       });
         for(var i =0;i<data_length;i++){
            console.log(data[i]);
-            
-        }
-        if(uname.value == 'admin' && pass.value == '8888')
+            if(uname.value == data[i].username && pass.value == data[i].password)
         {
             console.log('y');
             window.location.href = "/test_insert_data.html";
         }else{
             alert("User name or password is not correct");
         }
+        }
+        
     };
  
 </script>
