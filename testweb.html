@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data management</title>
+  <title>1Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -203,7 +203,7 @@
           <label for="comment"><b>Comment</b></label>
           <input type="text" placeholder="Enter comment" id="comment" name="comment" required>
 
-          <button id="save" onclick="getModal1()">Save</button>
+          <button id="save" onclick="getModal()">Save</button>
          
         </div>
     
@@ -232,7 +232,19 @@
     }
      function getModal1(){
        
-       var key = document.getElementById('keys');
+      
+     }
+       var id1 ;
+    function getModal(btn_this,id){
+      
+      // Get the modal
+      document.getElementById('id01').style.display='block';
+      console.log(id);
+     
+      if(id!=""){
+        id1=id;
+      }else{
+         var key = document.getElementById('keys');
       var link = document.getElementById('link');
       var comment = document.getElementById('comment');
       var data_all = firebase.database().ref();
@@ -244,20 +256,13 @@
     //  });
    //insert_data(id, key, comment, value)
       console.log(key.value);
-     var a = firebase.database().ref(id-1).update({
+     var a = firebase.database().ref(id1-1).update({
         key: key.value,
         comment: comment.value,
         link: link.value
       });
-     }
-       
-    function getModal(btn_this,id){
       
-      // Get the modal
-      document.getElementById('id01').style.display='block';
-      console.log(id);
-     document.getElementById('save').value;
-      
+      }
      // display_data()
       //----
       
