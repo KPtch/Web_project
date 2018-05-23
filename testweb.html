@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>5Data management</title>
+  <title>Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -257,36 +257,7 @@
     //  });
      // display_data()
       //----
-       while (i < data.length) {
-        console.log(key + "=" + data[i].key);
-        if (key == data[i].key) {
-          console.log("-----key == key ----");
-          num = 1;
-          console.log(key + "=" + data[i].key);
-          break;
-        }
-        i++;
-      }
-      // console.log("-----------");
-      console.log(num);
-      if (key != "" && value != "" && comment != "") {
-        if (num == 1) {
-          insert_data(data_length, key, comment, value);
-          alert("Save completed");
-        } else {
-          insert_data(data_length, key, comment, value);
-          alert("Save completed");
-        }
-      }else{
-        alert("Please enter a message.");
-      }
-      //-----
-      console.log(btn_this.value);
-      console.log(document.getElementById('save').onclick);
       
-      console.log(key);
-      console.log(link);
-      console.log(comment);
     }
     
     display_data();
