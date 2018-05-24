@@ -64,7 +64,7 @@ button {
   };
   firebase.initializeApp(config);
 
-    
+  var data_all = firebase.database().ref();
     
     document.getElementById('btn-login').onclick = function() {
         var uname = document.getElementById('name');
@@ -74,13 +74,15 @@ button {
         console.log(uname.value);
         console.log(pass.value);
       
-        var data_all = firebase.database().ref();
+        
         data_all.on("value", function (snapshot) {
              data        = snapshot.val();
              data_length = data.length;
              console.log(data_length);
+             console.log('y');
              for(var i =0;i<data_length;i++){
-                console.log(data[i]);
+                 console.log('y');
+                 console.log(data[i].username);
                  if(uname.value == data[i].username && pass.value == data[i].password)
                  {
                      console.log('y');
@@ -89,7 +91,7 @@ button {
                      alert("User name or password is not correct");
                  }
              }
-      });
+        });
        
         
     };
