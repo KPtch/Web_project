@@ -71,29 +71,27 @@ button {
         var pass = document.getElementById('pass');
         var data;
         var data_length;
-        console.log(uname.value);
-        console.log(pass.value);
+        var flag;
       
         
         data_all.on("value", function (snapshot) {
              data        = snapshot.val();
              data_length = data.length;
-             console.log(data_length);
-             console.log(data);
+             
              for(var i =0;i<data_length;i++){
-                 console.log('y');
-                 console.log(data[i].username);
+                 flag = 0;
                  if(uname.value == data[i].username && pass.value == data[i].password)
                  {
-                     console.log('y');
                      window.location.href = "/web.html";
                  }else{
-                     alert("User name or password is not correct");
+                     flag = 1;
                  }
              }
+             if (flag==1)
+            {
+                alert("User name or password is not correct");
+            }
         });
-       
-        
     };
  
 </script>
