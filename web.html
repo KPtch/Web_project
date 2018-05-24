@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Data management</title>
+  <title>1Data management</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -161,8 +161,8 @@
       <div class="col-sm-4">
         <button id="btn-reset" type="reset" value="Reset" class="btn btn-warning">Reset</button>
       </div>
-      <div class="col-sm-4" style="background-color: coral">
-        <button id="btn-reset" type="button" value="logout" class="btn logout">logout</button>
+      <div class="col-sm-4">
+        <button id="btn-logout" type="button" value="logout" class="btn logout">logout</button>
       </div>
     </div>
     
@@ -290,6 +290,9 @@
       insert_key.value      = "";
       insert_value.value    = "";
       insert_comment.value  = "";
+    };
+    document.getElementById('btn-logout').onclick = function() {
+      window.location.href = "/login_page.html";
     };
     document.getElementById('btn-insert').onclick = function () {
       var key     = insert_key.value;
