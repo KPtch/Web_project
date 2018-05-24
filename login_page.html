@@ -71,7 +71,7 @@ button {
         var pass = document.getElementById('pass');
         var data;
         var data_length;
-        var flag;
+        var flag = 0;
       
         
         data_all.on("value", function (snapshot) {
@@ -83,6 +83,7 @@ button {
                  if(uname.value == data[i].username && pass.value == data[i].password)
                  {
                      window.location.href = "/web.html";
+                     break;
                  }else{
                      flag = 1;
                  }
