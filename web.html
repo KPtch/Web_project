@@ -105,6 +105,13 @@
       color: red;
       cursor: pointer;
   }
+   .logout {
+      width:60px;
+      height:25px;
+      margin: auto;
+      background-color: #fefefe;
+      right: 20px;
+  }
   /* Add Zoom Animation */
   .animate {
       -webkit-animation: animatezoom 0.6s;
@@ -128,6 +135,7 @@
         width: 100%;
       }
   }
+   
 </style>
 </head>
 
@@ -141,15 +149,15 @@
   <div class="form-item form-type-textfield form-group">
     
     <div class="col-sm-4">
-      <label class="control-label" for="edit-key">Key</label>
+      <label class="control-label" for="edit-key">ชื่อใบเอกสาร</label>
       <input class="form-control form-text" type="text" id="insert-key" name="key" size="60" maxlength="255" placeholder="Type it here">
     </div>
     <div class="col-sm-4">
-      <label class="control-label" for="edit-key">Value</label>
+      <label class="control-label" for="edit-key">ลิ้งใบเอกสาร</label>
       <input class="form-control form-text" type="text" id="insert-value" name="value" size="60" maxlength="255" placeholder="Type it here">
     </div>
     <div class="col-sm-4">
-      <label class="control-label" for="edit-key">Comment</label>
+      <label class="control-label" for="edit-key">ลิ้งคำแนะนำ</label>
       <input class="form-control form-text" type="text" id="insert-comment" name="comment" size="60" maxlength="255" placeholder="Type it here">
     </div>
     <div class="col-sm-4" style="padding-top: 25px">
@@ -160,7 +168,9 @@
         <button id="btn-reset" type="reset" value="Reset" class="btn btn-warning">Reset</button>
       </div>
     </div>
-
+    <div class="logout">
+        <button id="btn-reset" type="button" value="logout" class="btn logout">logout</button>
+    </div>
   </div>
   <br>
   <br>
